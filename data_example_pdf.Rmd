@@ -26,7 +26,7 @@ Junctions are breakpoints between genomic segments of different ancestry.
 
 We simulated junctions in a stepping stone model using `forqs` [@kessner_forqs:_2014]. 
 
-![Figure 1. Stepping Stone Model](data_example/demes1.png)
+![Stepping Stone Model](data_example/demes1.png)
 
 
 
