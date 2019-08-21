@@ -1,0 +1,147 @@
+---
+title: "Payseur Lab R Markdown Workshop"
+date : "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+
+knitr::opts_chunk$set(echo=FALSE) # adds this "chunk option" to all chunks 
+
+```
+
+# Introduction 
+
+R Markdown files are a great way to create reproducible reports. They can be easily tracked by version control programs. Plus, they look great!  
+
+Your document consists of code and writing. The writing is in the Markdown format. This means that you can do basic formatting like making things **bold** or *italic* or ~~struck through~~. You can even do superscripts^yes!^ or subscripts~yes!~, and some basic equations: $A=\pi*r^{2}$.More information on the basic syntax can be found on this  [cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). 
+
+The code comes in two forms. There can be code "chunks" or inline code. Inline code looks something like this: Built with R `r getRversion()`. 
+
+Code chunks look like this: 
+
+
+```{r data, echo=TRUE}
+
+df <- mtcars
+
+```
+
+# Very Basic Rules 
+
+1. Each chunk must have a unique name.
+2. Code will be evaluated in order, so be careful about reusing object names. 
+
+# Very Basic Examples 
+
+Here is an example of a plot: 
+
+```{r plot_example, fig.width=10, fig.height=5}
+
+ggplot(mtcars, aes(mpg,cyl)) + geom_point() 
+
+```
+
+Here is an example of a table:
+
+```{r table_example}
+
+mtcars_sub <- mtcars[c(1:4),c(1:4)]
+
+mtcars_sub %>%
+  kable(caption = "Table 1. Sample Table.") %>%
+  kable_styling()
+
+```
+
+# Things I have found useful 
+
+1. Have set up and data-loading code chunks is useful.
+2. You can cut off the evaluation of a document with the command `knitr_exit()`. For example, if your document has 5 sections, but you want to check a change to the first section, you can add this command to the end of the code block you want to check, and then it won't print out anything after that code point. 
+3. Multiplot can be used inside of code chunks in order to put plots side by side (I put an example at the below). There are other ways to do this, but I found multiplot to be the easiest. 
+
+## Multiplot Example 
+
+```{r multiplot_example, fig.width=10, fig.height=5}
+
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+     library(grid)
+     
+     # Make a list from the ... arguments and plotlist
+     plots <- c(list(...), plotlist)
+     
+     numPlots = length(plots)
+     
+     # If layout is NULL, then use 'cols' to determine layout
+     if (is.null(layout)) {
+         # Make the panel
+         # ncol: Number of columns of plots
+         # nrow: Number of rows needed, calculated from # of cols
+         layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                          ncol = cols, nrow = ceiling(numPlots/cols))
+     }
+     
+     if (numPlots==1) {
+         print(plots[[1]])
+         
+     } else {
+         # Set up the page
+         grid.newpage()
+         pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+         
+         # Make each plot, in the correct location
+         for (i in 1:numPlots) {
+             # Get the i,j matrix positions of the regions that contain this subplot
+             matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+             
+             print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                             layout.pos.col = matchidx$col))
+         }
+     }
+ }
+
+
+a <- ggplot(mtcars, aes(mpg,cyl)) + geom_point() 
+b <- ggplot(mtcars, aes(mpg,hp)) + geom_point() 
+
+multiplot(a,b, cols = 2)
+
+```
+
+## Chunk Options 
+
+Chunk Options can be used to adjust the way a documents is formatting or evaluated. There are lots of chunk options, but here are some basic ones: 
+
+include=FALSE : Will not print code or output, but will evaluate the code chunk (useful for setup blocks)
+
+echo=FALSE : Will not print code, but will evaluate the chunk and print output 
+
+eval=FALSE : Will not evaluate the chunk (or print code)
+
+
+# Other cool features 
+
+- There are options to embed [citations](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html).
+- You can embed gifs or images. 
+- You can turn .Rmd files into reusable templates. 
+- You can add an automated table of contents. 
+
+
+# Bonus gganimate example
+
+Here is a basic gganimate example, in case you were interested! (Currently set to `eval=FALSE`, remove that to include it in the knitted document.)
+
+```{r gganimate_example, fig.width=10, fig.height=5, eval=FALSE}
+library(gganimate)
+
+# Normal boxplot code:
+ggplot(mtcars, aes(factor(cyl), mpg)) + geom_boxplot() + 
+# Add the gganimate code
+  transition_states(gear, transition_length = 2, state_length = 1 ) +
+  labs(title = 'Gear: {closest_state}')
+
+```

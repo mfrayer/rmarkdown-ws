@@ -1,0 +1,38 @@
+---
+title: "My Data Analysis"
+date : "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+
+knitr::opts_chunk$set(echo=FALSE) # adds this "chunk option" to all chunks 
+
+```
+
+# My Data 
+
+Describe your data. 
+
+```{r data}
+
+df <- read.csv("filename")
+#df <-  readRDS(file = "filename")
+
+df %>%
+  kable(caption = "Table 1. Sample Table.") %>%
+  kable_styling()
+
+```
+
+# My Figure 
+
+```{r plot}
+
+
+
+```
