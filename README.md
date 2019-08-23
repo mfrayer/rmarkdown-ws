@@ -4,6 +4,14 @@ The goal of this workshop is to introduce you to R Markdown and get you to try i
 
 ## Pre-Workshop Instructions 
 
+First, make sure that your laptop has a working version of R and RStudio. Install the following packages in order to run the example:
+
+~~~~~~~~~~~~~~~~~~
+install.packages("knitr")
+install.packages("ggplot2")
+install.packages("kableExtra")
+~~~~~~~~~~~~~~~~~~
+
 You may get more out of the workshop if you bring your own data! If you want, bring an R script you already have, or even just a data set. If you have a big data set on your desktop, you can subset it and save that as an R image using `saveRDS(dataframe, file = "mydata.rds")` and bring that. If you aren't currently using R, just bring a dataset and we can get it loaded in. 
 
 Choose something that you can make simple figures from, or bring the code to make the figure, too. 
