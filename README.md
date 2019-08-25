@@ -16,13 +16,13 @@ You may get more out of the workshop if you bring your own data! If you want, br
 
 Choose something that you can make simple figures from, or bring the code to make the figure, too. 
 
-Finally, download this workshop. 
+Finally, download this workshop using one of the two options below. 
 
 1. With Git: 
 ~~~~~~~~~~~~~~~~~~
 git clone https://github.com/mfrayer/rmarkdown-ws.git
 ~~~~~~~~~~~~~~~~~~
-2. Download from GitHub: Go to `https://github.com/mfrayer/rmarkdown-ws`, click `Clone or Download` and `Download Zip`. 
+2. Download directly from GitHub: Go to `https://github.com/mfrayer/rmarkdown-ws`, click `Clone or Download` and `Download Zip`. 
 
 
 ## Workshop Itinerary 
