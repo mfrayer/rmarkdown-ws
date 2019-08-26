@@ -14,6 +14,7 @@ bibliography: data_example/refs.bib
 library(ggplot2)
 library(knitr)
 library(kableExtra)
+library(gganimate)
 
 knitr::opts_chunk$set(echo=FALSE) # adds this "chunk option" to all chunks 
 
@@ -43,7 +44,7 @@ mean_jn_table_short %>%
 
 ```
 
-## Figure 
+## Figures 
 
 ```{r plot_example, fig.width=10, fig.height=5}
 
@@ -52,6 +53,22 @@ ggplot(mean_jn_table, aes(GEN,mean_jn)) + geom_line() + xlab("Generations of Adm
 ```
 Figure 2. The line shows the mean over 100 replicates and the bars show the standard deviation.
 
+```{r gganimate_example}
+
+# requires the following packages to be installed: gganimate, gifski, png 
+
+# Normal plot code:
+ggplot(mean_jn_table, aes(GEN,mean_jn)) + geom_point() + xlab("Generations of Admixture") + ylab("Mean Junction Number") + geom_errorbar(aes(ymin=mean_jn-sd_jn, ymax=mean_jn+sd_jn), width=.2) + 
+# Add the gganimate code
+  transition_states(GEN, transition_length = 2, state_length = 1 ) +
+  labs(title = 'Generation: {closest_state}') +
+  shadow_mark(alpha=0.4)
+
+
+# See more examples here: https://www.datanovia.com/en/blog/gganimate-how-to-create-plots-with-beautiful-animation-in-r/
+
+```
+Figure 3 shows the data changing over time. 
 
 # Conclusions 
 
