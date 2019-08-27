@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo=FALSE) # adds this "chunk option" to all chunks
 
 R Markdown files are a great way to create reproducible reports. They can be easily tracked by version control programs. Plus, they look great!  
 
-Your document consists of code and writing. The writing is in the Markdown format. This means that you can do basic formatting like making things **bold** or *italic* or ~~struck through~~. You can even do superscripts^yes!^ or subscripts~yes!~, and some basic equations: $A=\pi*r^{2}$.More information on the basic syntax can be found on this  [cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). 
+Your document consists of code and writing. The writing is in the Markdown format. This means that you can do basic formatting like making things **bold** or *italic* or ~~struck through~~. You can even do superscripts^yes!^ or subscripts~yes!~, and some basic equations: $A=\pi*r^{2}$. More information on the basic syntax can be found on this [cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). 
 
 The code comes in two forms. There can be code "chunks" or inline code. Inline code looks something like this: Built with R `r getRversion()`. 
 
@@ -58,13 +58,41 @@ mtcars_sub %>%
 
 ```
 
+# Chunk Options 
+
+Chunk options can be used to adjust the way a document is formatted or evaluated. There are many chunk options, but here are some basic ones: 
+
+include=FALSE : Will not print code or output, but will evaluate the code chunk (useful for setup blocks)
+
+echo=FALSE : Will not print code, but will evaluate the chunk and print output 
+
+eval=FALSE : Will not evaluate the chunk (or print code)
+
+
+# Knitting from the command line 
+
+You can knit outside of RStudio as well: 
+
+~~~~~~
+$ Rscript -e "library(knitr); knit('workshop.Rmd')"
+~~~~~~
+
+or 
+
+~~~~~~
+$ R 
+> library(knitr); knit('workshop.Rmd')
+~~~~~~
+
+
 # Things I have found useful 
 
-1. Have set up and data-loading code chunks is useful.
-2. You can cut off the evaluation of a document with the command `knitr_exit()`. For example, if your document has 5 sections, but you want to check a change to the first section, you can add this command to the end of the code block you want to check, and then it won't print out anything after that code point. 
-3. Multiplot can be used inside of code chunks in order to put plots side by side (I put an example at the below). There are other ways to do this, but I found multiplot to be the easiest. 
+1. Having separate "set up" and "data importing" code chunks at the beginning is useful. It makes it easier to make changes and to make sure you have the things loaded that you need.
+2. There are many options for the YAML header, but be careful with the formatting! Order and nesting (number of tabs) matters. 
+3. You can cut off the evaluation of a document with the command `knitr_exit()`. For example, if your document has 5 sections, but you want to check a change to the first section, you can add this command to the end of the code block you want to check, and then it won't print out anything after that code point. 
+4. Multiplot can be used inside of code chunks in order to put plots side by side (I put an example at the below). There are other ways to do this, but I found multiplot to be the easiest. 
 
-## Multiplot Example 
+### Multiplot Example 
 
 ```{r multiplot_example, fig.width=10, fig.height=5}
 
@@ -112,30 +140,6 @@ multiplot(a,b, cols = 2)
 
 ```
 
-## Chunk Options 
-
-Chunk Options can be used to adjust the way a documents is formatting or evaluated. There are lots of chunk options, but here are some basic ones: 
-
-include=FALSE : Will not print code or output, but will evaluate the code chunk (useful for setup blocks)
-
-echo=FALSE : Will not print code, but will evaluate the chunk and print output 
-
-eval=FALSE : Will not evaluate the chunk (or print code)
-
-## Knitting from the command line 
-
-You can knit outside of RStudio as well: 
-
-~~~~~~
-$ Rscript -e "library(knitr); knit('workshop.Rmd')"
-~~~~~~
-
-or 
-
-~~~~~~
-$ R 
-> library(knitr); knit('workshop.Rmd')
-~~~~~~
 
 # Other cool features 
 
