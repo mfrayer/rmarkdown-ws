@@ -122,6 +122,20 @@ echo=FALSE : Will not print code, but will evaluate the chunk and print output
 
 eval=FALSE : Will not evaluate the chunk (or print code)
 
+## Knitting from the command line 
+
+You can knit outside of RStudio as well: 
+
+~~~~~~
+$ Rscript -e "library(knitr); knit('workshop.Rmd')"
+~~~~~~
+
+or 
+
+~~~~~~
+$ R 
+> library(knitr); knit('workshop.Rmd')
+~~~~~~
 
 # Other cool features 
 
