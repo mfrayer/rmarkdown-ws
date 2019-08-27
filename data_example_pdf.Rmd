@@ -44,7 +44,7 @@ mean_jn_table <- readRDS(file = "data_example/jnOverTime.rds")
 mean_jn_table_short <- mean_jn_table[c(1:10),]
 
 mean_jn_table_short %>%
-  kable(caption = "Table 1. Mean and Standard Deviation of Junction Number across 100 Replicates.", col.names = c("Generations","Mean Junction Number","Junction Number SD")) %>%
+  kable(caption = "Mean and Standard Deviation of Junction Number across 100 Replicates.", col.names = c("Generations","Mean Junction Number","Junction Number SD")) %>%
   kable_styling(latex_options = "hold_position")
 
 ```
