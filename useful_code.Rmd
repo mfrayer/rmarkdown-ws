@@ -1,0 +1,36 @@
+---
+title: "Useful Code Tricks for R Markdown"
+date : "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(knitr)
+
+```
+
+
+# Purpose 
+
+This document can be a repository for useful R Markdown tips that we want to share with each other. 
+
+# Code Tips and Tricks 
+
+## Printing text from inside a code chunk 
+
+Added August 28, 2019 
+
+This is especially useful if you want to evaluate output in a loop. 
+
+To print in a code chunk, use `cat()` and the chunk option `results="asis"`. It is cleanest if you also use `echo=FALSE`. 
+
+```{r text_in_code, echo=FALSE, results="asis"}
+
+2+2 
+
+cat("\n\n### Test header\n\nExample text.\n\n")
+
+4+4
+
+```
